@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { getUsers, getUsersPending, addUsers } from "../actions/user";
+import { getUsers, addUsers } from "../actions/user";
 
 class User extends Component {
   
@@ -18,13 +18,19 @@ class User extends Component {
     this.props.getUsers();
   };
 
+  handleAdd = () => {
+    alert("klick");
+    this.props.addUsers();
+  };
+
   render() {
     console.log(this.props.user);
     const {isError, isLoading, data} = this.props.user;
     console.log("isError",isError);
     return (
       <div>
-        <button onClick={this.handleClick}>LOAD FROM SERVER</button>
+        <button onClick={this.handleClick}>LOAD USER FROM SERVER</button>
+        <button onClick={this.handleAdd}>ADD USER HARDCORE</button>
 
         {
             isError&&<div>Error</div>
@@ -48,7 +54,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getUsers: () => dispatch(getUsers()),
-    getUsersPending: () => dispatch(getUsersPending()),
     addUsers: () => dispatch(addUsers())
   };
 };
